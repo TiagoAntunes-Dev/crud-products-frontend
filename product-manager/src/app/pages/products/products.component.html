@@ -1,0 +1,82 @@
+<div class="content-container">
+
+  <div class="listing-header">
+    <h2>📦 Produtos</h2>
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Buscar</mat-label>
+      <input matInput [(ngModel)]="termoBusca" (input)="filtrar()" placeholder="Nome ou categoria...">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="novo()">
+      <mat-icon>add</mat-icon> Novo Produto
+    </button>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <mat-icon>inventory_2</mat-icon>
+      <div><span class="stat-label">Total</span><span class="stat-value">{{ products.length }}</span></div>
+    </div>
+    <div class="stat-card">
+      <mat-icon>warehouse</mat-icon>
+      <div><span class="stat-label">Estoque</span><span class="stat-value">{{ totalEstoque }}</span></div>
+    </div>
+    <div class="stat-card">
+      <mat-icon>payments</mat-icon>
+      <div><span class="stat-label">Valor Total</span><span class="stat-value">R$ {{ valorTotal | number:'1.2-2' }}</span></div>
+    </div>
+  </div>
+
+  @if (loading) {
+    <div class="loading-center"><mat-spinner diameter="40"></mat-spinner></div>
+  } @else {
+    <div class="table-container mat-elevation-z2">
+      <table mat-table [dataSource]="productsFiltrados">
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Nome</th>
+          <td mat-cell *matCellDef="let p" class="td-nome">{{ p.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef>Categoria</th>
+          <td mat-cell *matCellDef="let p">
+            <span class="badge">{{ getCategoryName(p) }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef>Preço</th>
+          <td mat-cell *matCellDef="let p" class="td-preco">R$ {{ p.price | number:'1.2-2' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef>Estoque</th>
+          <td mat-cell *matCellDef="let p">{{ p.quantity }} un.</td>
+        </ng-container>
+
+        <ng-container matColumnDef="acoes">
+          <th mat-header-cell *matHeaderCellDef>Ações</th>
+          <td mat-cell *matCellDef="let p">
+            <button mat-icon-button color="primary" (click)="editar(p._id!)" title="Editar">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="remover(p._id!, p.name)" title="Excluir">
+              <mat-icon>delete_outline</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell empty-row" colspan="5">Nenhum produto encontrado para "{{ termoBusca }}"</td>
+        </tr>
+
+      </table>
+    </div>
+    <p class="rodape">{{ productsFiltrados.length }} produto(s) exibido(s)</p>
+  }
+
+</div>
