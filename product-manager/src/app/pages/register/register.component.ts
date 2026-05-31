@@ -19,7 +19,7 @@ import { AuthService } from '../../services/auth.service';
     MatIconModule, MatSnackBarModule, MatProgressSpinnerModule
   ],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
 

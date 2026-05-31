@@ -20,7 +20,7 @@ import { Category } from '../../models/category.model';
     MatCardModule, MatButtonModule, MatIconModule, MatProgressSpinnerModule
   ],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
 

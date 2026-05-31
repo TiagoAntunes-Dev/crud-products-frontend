@@ -22,7 +22,7 @@ import { Category } from '../../models/category.model';
     MatProgressSpinnerModule, MatSnackBarModule
   ],
   templateUrl: './categories.component.html',
-  styleUrl: './categories.component.css'
+  styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent implements OnInit {
 

@@ -19,7 +19,7 @@ import { CategoryService } from '../../services/category.service';
     MatIconModule, MatSnackBarModule, MatProgressSpinnerModule
   ],
   templateUrl: './category-form.component.html',
-  styleUrl: './category-form.component.css'
+  styleUrls: ['./category-form.component.css']
 })
 export class CategoryFormComponent {
 

@@ -16,7 +16,7 @@ import { AuthService } from '../../services/auth.service';
     MatToolbarModule, MatButtonModule, MatIconModule, MatMenuModule, MatChipsModule
   ],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
 

@@ -8,8 +8,8 @@ import { CommonModule } from '@angular/common';
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule, RouterOutlet, HeaderComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  templateUrl: './app.html',
+  styleUrls: ['./app.css']
 })
 export class AppComponent {
   constructor(public authService: AuthService) {}

@@ -24,7 +24,7 @@ import { Product, Category } from '../../models/product.model';
     MatProgressSpinnerModule, MatSnackBarModule
   ],
   templateUrl: './products.component.html',
-  styleUrl: './products.component.css'
+  styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
 

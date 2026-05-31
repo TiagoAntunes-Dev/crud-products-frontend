@@ -23,7 +23,7 @@ import { Product } from '../../models/product.model';
     MatSelectModule, MatIconModule, MatSnackBarModule, MatProgressSpinnerModule
   ],
   templateUrl: './product-form.component.html',
-  styleUrl: './product-form.component.css'
+  styleUrls: ['./product-form.component.css']
 })
 export class ProductFormComponent implements OnInit {
 
