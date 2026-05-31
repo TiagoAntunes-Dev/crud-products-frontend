@@ -1,0 +1,76 @@
+<div class="content-container">
+
+  <div class="page-header">
+    <h2>👋 Olá, {{ userName }}!</h2>
+    <p>Aqui está o resumo do seu estoque.</p>
+  </div>
+
+  @if (loading) {
+    <div class="loading-center">
+      <mat-spinner diameter="40"></mat-spinner>
+    </div>
+  } @else {
+    <!-- Cards de estatísticas -->
+    <div class="stats-grid">
+
+      <mat-card class="stat-card">
+        <mat-card-content>
+          <mat-icon class="stat-icon products-icon">inventory_2</mat-icon>
+          <div class="stat-info">
+            <span class="stat-value">{{ totalProdutos }}</span>
+            <span class="stat-label">Produtos</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="stat-card">
+        <mat-card-content>
+          <mat-icon class="stat-icon categories-icon">label</mat-icon>
+          <div class="stat-info">
+            <span class="stat-value">{{ totalCategorias }}</span>
+            <span class="stat-label">Categorias</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="stat-card">
+        <mat-card-content>
+          <mat-icon class="stat-icon stock-icon">warehouse</mat-icon>
+          <div class="stat-info">
+            <span class="stat-value">{{ totalEstoque }}</span>
+            <span class="stat-label">Itens em Estoque</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="stat-card">
+        <mat-card-content>
+          <mat-icon class="stat-icon value-icon">payments</mat-icon>
+          <div class="stat-info">
+            <span class="stat-value">R$ {{ valorTotal | number:'1.2-2' }}</span>
+            <span class="stat-label">Valor Total</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+    </div>
+
+    <!-- Ações rápidas -->
+    <h3 class="section-title">Ações Rápidas</h3>
+    <div class="actions-grid">
+      <button mat-raised-button color="primary" routerLink="/products">
+        <mat-icon>list</mat-icon> Ver Produtos
+      </button>
+      <button mat-raised-button color="primary" routerLink="/products/new">
+        <mat-icon>add</mat-icon> Novo Produto
+      </button>
+      <button mat-raised-button routerLink="/categories">
+        <mat-icon>label</mat-icon> Ver Categorias
+      </button>
+      <button mat-raised-button routerLink="/categories/new">
+        <mat-icon>add</mat-icon> Nova Categoria
+      </button>
+    </div>
+  }
+
+</div>
