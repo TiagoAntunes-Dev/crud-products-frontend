@@ -1,0 +1,15 @@
+.form-header { margin-bottom: 28px; }
+.form-header h2 { font-size: 22px; font-weight: 700; margin: 0 0 4px; }
+.form-header p  { color: #757575; margin: 0; font-size: 14px; }
+.required-star  { color: #c62828; font-weight: 700; }
+
+.cat-form { display: flex; flex-direction: column; gap: 4px; max-width: 560px; }
+.full-width { width: 100%; }
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+.form-actions button { display: flex; align-items: center; gap: 6px; min-width: 130px; }
