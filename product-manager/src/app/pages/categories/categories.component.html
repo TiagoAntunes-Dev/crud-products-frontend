@@ -1,0 +1,61 @@
+<div class="content-container">
+
+  <div class="listing-header">
+    <h2>🏷️ Categorias</h2>
+    <button mat-raised-button color="primary" (click)="nova()">
+      <mat-icon>add</mat-icon> Nova Categoria
+    </button>
+  </div>
+
+  <div class="info-banner">
+    <mat-icon>info_outline</mat-icon>
+    <span>Categorias com produtos vinculados <strong>não podem ser excluídas</strong> — remova os produtos antes.</span>
+  </div>
+
+  @if (loading) {
+    <div class="loading-center"><mat-spinner diameter="40"></mat-spinner></div>
+  } @else {
+    <div class="table-container mat-elevation-z2">
+      <table mat-table [dataSource]="categories">
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Nome</th>
+          <td mat-cell *matCellDef="let c" class="td-name">{{ c.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Descrição</th>
+          <td mat-cell *matCellDef="let c" class="td-desc">{{ c.description || '—' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef>Criada em</th>
+          <td mat-cell *matCellDef="let c">{{ c.createdAt | date:'dd/MM/yyyy' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="acoes">
+          <th mat-header-cell *matHeaderCellDef>Ações</th>
+          <td mat-cell *matCellDef="let c">
+            <button mat-icon-button color="warn"
+              (click)="remover(c._id, c.name)"
+              title="Excluir categoria">
+              <mat-icon>delete_outline</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell empty-row" colspan="4">
+            Nenhuma categoria cadastrada ainda.
+          </td>
+        </tr>
+
+      </table>
+    </div>
+    <p class="rodape">{{ categories.length }} categoria(s) cadastrada(s)</p>
+  }
+
+</div>
