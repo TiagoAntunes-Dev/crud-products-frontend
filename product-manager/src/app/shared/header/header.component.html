@@ -1,0 +1,42 @@
+<mat-toolbar color="primary">
+
+  <button mat-button class="logo-button" routerLink="/dashboard">
+    <mat-icon>inventory_2</mat-icon>
+    <span>ProductManager</span>
+  </button>
+
+  <span class="spacer"></span>
+
+  @if (authService.isLoggedIn()) {
+    <button mat-button routerLink="/dashboard" routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{exact: true}">
+      <mat-icon>dashboard</mat-icon> Dashboard
+    </button>
+
+    <button mat-button routerLink="/products" routerLinkActive="active-link">
+      <mat-icon>shopping_bag</mat-icon> Produtos
+    </button>
+
+    <button mat-button routerLink="/categories" routerLinkActive="active-link">
+      <mat-icon>label</mat-icon> Categorias
+    </button>
+
+    <!-- Chip com nome do usuário logado -->
+    <mat-chip class="user-chip">
+      <mat-icon matChipAvatar>person</mat-icon>
+      {{ userName }}
+    </mat-chip>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu do usuário">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Sair</span>
+      </button>
+    </mat-menu>
+  }
+
+</mat-toolbar>

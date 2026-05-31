@@ -1,0 +1,22 @@
+.spacer { flex: 1 1 auto; }
+
+.logo-button {
+  background-color: rgba(255,255,255,0.15);
+  border-radius: 15px;
+  padding: 0 12px;
+  font-size: 15px;
+  font-weight: 600;
+}
+.logo-button:hover { background-color: rgba(255,255,255,0.25); }
+.logo-button mat-icon { margin-right: 6px; }
+
+.active-link {
+  background-color: rgba(255,255,255,0.15) !important;
+  border-radius: 4px;
+}
+
+.user-chip {
+  background-color: rgba(255,255,255,0.2) !important;
+  color: white !important;
+  margin: 0 8px;
+}
