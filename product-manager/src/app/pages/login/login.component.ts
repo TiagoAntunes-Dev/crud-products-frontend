@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,45 +15,64 @@ import { AuthService } from '../../services/auth.service';
   selector: 'app-login',
   standalone: true,
   imports: [
-    CommonModule, RouterModule, ReactiveFormsModule,
-    MatInputModule, MatFormFieldModule, MatButtonModule,
-    MatIconModule, MatSnackBarModule, MatProgressSpinnerModule
+    CommonModule,
+    RouterModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-
   loading = false;
   hidePassword = true;
 
   form = new FormGroup({
-    email:    new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(6)])
+    email: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.email],
+    }),
+    password: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.minLength(6)],
+    }),
   });
 
   constructor(
     private authService: AuthService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
   ) {}
 
   onSubmit(): void {
-    if (this.form.invalid) return;
-    this.loading = true;
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
 
-    this.authService.login(this.form.value as any).subscribe({
+    this.loading = true;
+    const payload = this.form.getRawValue();
+
+    this.authService.login(payload).subscribe({
       next: () => this.router.navigate(['/dashboard']),
-      error: (err) => {
-        this.snackBar.open(
-          err.error?.message || 'Erro ao fazer login.',
-          'Fechar', { duration: 4000 }
-        );
+      error: (err: HttpErrorResponse) => {
+        this.snackBar.open(err.error?.message || 'Erro ao fazer login.', 'Fechar', {
+          duration: 4000,
+        });
         this.loading = false;
-      }
+      },
     });
   }
 
-  get email()    { return this.form.get('email'); }
-  get password() { return this.form.get('password'); }
+  get email(): FormControl<string> {
+    return this.form.controls.email;
+  }
+  get password(): FormControl<string> {
+    return this.form.controls.password;
+  }
 }

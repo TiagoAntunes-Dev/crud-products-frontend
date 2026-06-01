@@ -4,14 +4,8 @@ import { AuthService } from '../services/auth.service';
 
 // Guard funcional (Angular 17+) — protege rotas que precisam de login
 export const authGuard: CanActivateFn = () => {
-  const auth   = inject(AuthService);
+  const auth = inject(AuthService);
   const router = inject(Router);
 
-  if (auth.isLoggedIn()) {
-    return true;
-  }
-
-  // Não logado: redireciona para login
-  router.navigate(['/login']);
-  return false;
+  return auth.isLoggedIn() ? true : router.createUrlTree(['/login']);
 };

@@ -1,10 +1,4 @@
-// Interface que espelha exatamente o que a API retorna
-// MongoDB usa _id (string) em vez do id numérico do json-server
-export interface Category {
-  _id: string;
-  name: string;
-  description?: string;
-}
+import { Category } from './category.model';
 
 export interface Product {
   _id?: string;
@@ -12,7 +6,7 @@ export interface Product {
   quantity: number;
   price: number;
   image?: string;
-  category?: Category | string | null; // pode vir populado ou como ID
+  category?: Category | string | null;
   createdAt?: string;
   updatedAt?: string;
 }
