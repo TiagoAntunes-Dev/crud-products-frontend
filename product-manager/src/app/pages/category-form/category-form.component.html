@@ -12,15 +12,9 @@
       <mat-label>Nome da Categoria *</mat-label>
       <input matInput formControlName="name" placeholder="Ex: Doces, Salgados, Bebidas..." />
       <mat-icon matSuffix>label</mat-icon>
-      @if (name.hasError('required') && name.touched) {
-        <mat-error>Nome é obrigatório</mat-error>
-      }
-      @if (name.hasError('minlength') && name.touched) {
-        <mat-error>Mínimo 2 caracteres</mat-error>
-      }
-      @if (name.hasError('maxlength') && name.touched) {
-        <mat-error>Máximo 40 caracteres</mat-error>
-      }
+      <mat-error *ngIf="name.hasError('required') && name.touched">Nome é obrigatório</mat-error>
+      <mat-error *ngIf="name.hasError('minlength') && name.touched">Mínimo 2 caracteres</mat-error>
+      <mat-error *ngIf="name.hasError('maxlength') && name.touched">Máximo 40 caracteres</mat-error>
       <mat-hint align="end">{{ charName }}/40</mat-hint>
     </mat-form-field>
 
@@ -31,11 +25,8 @@
         formControlName="description"
         rows="3"
         placeholder="Ex: Produtos com alto teor de açúcar, sobremesas e guloseimas."
-      >
-      </textarea>
-      @if (description.hasError('maxlength') && description.touched) {
-        <mat-error>Máximo 120 caracteres</mat-error>
-      }
+      ></textarea>
+      <mat-error *ngIf="description.hasError('maxlength') && description.touched">Máximo 120 caracteres</mat-error>
       <mat-hint align="end">{{ charDesc }}/120</mat-hint>
     </mat-form-field>
 
@@ -44,15 +35,11 @@
         <mat-icon>arrow_back</mat-icon> Cancelar
       </button>
       <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || loading">
-        @if (loading) {
-          <mat-spinner diameter="20"></mat-spinner>
-        }
-        @if (!loading) {
+        <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
+        <ng-container *ngIf="!loading">
           <mat-icon>save</mat-icon>
-        }
-        @if (!loading) {
           <span>CRIAR CATEGORIA</span>
-        }
+        </ng-container>
       </button>
     </div>
   </form>

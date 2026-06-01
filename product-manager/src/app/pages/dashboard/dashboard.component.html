@@ -5,11 +5,11 @@
     <p>Aqui está o resumo do seu estoque.</p>
   </div>
 
-  @if (loading) {
-    <div class="loading-center">
-      <mat-spinner diameter="40"></mat-spinner>
-    </div>
-  } @else {
+  <div *ngIf="loading" class="loading-center">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+
+  <div *ngIf="!loading">
     <!-- Cards de estatísticas -->
     <div class="stats-grid">
 
@@ -71,6 +71,5 @@
         <mat-icon>add</mat-icon> Nova Categoria
       </button>
     </div>
-  }
 
 </div>

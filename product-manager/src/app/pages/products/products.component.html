@@ -39,10 +39,8 @@
     </div>
   </div>
 
-  @if (loading) {
-    <div class="loading-center"><mat-spinner diameter="40"></mat-spinner></div>
-  } @else {
-    <div class="table-container mat-elevation-z2">
+  <div *ngIf="loading" class="loading-center"><mat-spinner diameter="40"></mat-spinner></div>
+  <div *ngIf="!loading" class="table-container mat-elevation-z2">
       <table mat-table [dataSource]="productsFiltrados">
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>Nome</th>
@@ -88,5 +86,4 @@
       </table>
     </div>
     <p class="rodape">{{ productsFiltrados.length }} produto(s) exibido(s)</p>
-  }
 </div>

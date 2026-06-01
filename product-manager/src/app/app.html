@@ -1,7 +1,5 @@
 <!-- Header só aparece quando o usuário está autenticado -->
-@if (authService.isLoggedIn()) {
-  <app-header></app-header>
-}
+<app-header *ngIf="authService.isLoggedIn()"></app-header>
 
 <!-- RouterOutlet renderiza a página ativa conforme app.routes.ts -->
 <router-outlet></router-outlet>

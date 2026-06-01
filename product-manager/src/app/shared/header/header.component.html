@@ -7,7 +7,7 @@
 
   <span class="spacer"></span>
 
-  @if (authService.isLoggedIn()) {
+  <ng-container *ngIf="authService.isLoggedIn()">
     <button mat-button routerLink="/dashboard" routerLinkActive="active-link"
       [routerLinkActiveOptions]="{exact: true}">
       <mat-icon>dashboard</mat-icon> Dashboard
@@ -37,6 +37,6 @@
         <span>Sair</span>
       </button>
     </mat-menu>
-  }
+  </ng-container>
 
 </mat-toolbar>

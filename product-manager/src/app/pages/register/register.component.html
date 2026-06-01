@@ -11,24 +11,16 @@
         <mat-label>Nome</mat-label>
         <input matInput formControlName="name" placeholder="Seu nome completo" />
         <mat-icon matSuffix>person</mat-icon>
-        @if (name.hasError('required') && name.touched) {
-          <mat-error>Nome é obrigatório</mat-error>
-        }
-        @if (name.hasError('minlength') && name.touched) {
-          <mat-error>Mínimo 2 caracteres</mat-error>
-        }
+        <mat-error *ngIf="name.hasError('required') && name.touched">Nome é obrigatório</mat-error>
+        <mat-error *ngIf="name.hasError('minlength') && name.touched">Mínimo 2 caracteres</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>E-mail</mat-label>
         <input matInput type="email" formControlName="email" placeholder="seu@email.com" />
         <mat-icon matSuffix>email</mat-icon>
-        @if (email.hasError('required') && email.touched) {
-          <mat-error>E-mail é obrigatório</mat-error>
-        }
-        @if (email.hasError('email') && email.touched) {
-          <mat-error>E-mail inválido</mat-error>
-        }
+        <mat-error *ngIf="email.hasError('required') && email.touched">E-mail é obrigatório</mat-error>
+        <mat-error *ngIf="email.hasError('email') && email.touched">E-mail inválido</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="full-width">
@@ -37,12 +29,8 @@
         <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">
           <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
         </button>
-        @if (password.hasError('required') && password.touched) {
-          <mat-error>Senha é obrigatória</mat-error>
-        }
-        @if (password.hasError('minlength') && password.touched) {
-          <mat-error>Mínimo 6 caracteres</mat-error>
-        }
+        <mat-error *ngIf="password.hasError('required') && password.touched">Senha é obrigatória</mat-error>
+        <mat-error *ngIf="password.hasError('minlength') && password.touched">Mínimo 6 caracteres</mat-error>
       </mat-form-field>
 
       <button
@@ -52,15 +40,11 @@
         class="full-width submit-btn"
         [disabled]="form.invalid || loading"
       >
-        @if (loading) {
-          <mat-spinner diameter="20"></mat-spinner>
-        }
-        @if (!loading) {
+        <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
+        <ng-container *ngIf="!loading">
           <mat-icon>person_add</mat-icon>
-        }
-        @if (!loading) {
           <span>CRIAR CONTA</span>
-        }
+        </ng-container>
       </button>
     </form>
 
