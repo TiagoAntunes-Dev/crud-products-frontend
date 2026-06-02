@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -28,6 +28,11 @@ import { CategoryService } from '../../services/category.service';
   styleUrls: ['./category-form.component.css'],
 })
 export class CategoryFormComponent {
+
+  private router          = inject(Router);
+  private categoryService = inject(CategoryService);
+  private snackBar        = inject(MatSnackBar);
+
   loading = false;
 
   form = new FormGroup({
@@ -40,12 +45,6 @@ export class CategoryFormComponent {
       validators: [Validators.maxLength(120)],
     }),
   });
-
-  constructor(
-    private router: Router,
-    private categoryService: CategoryService,
-    private snackBar: MatSnackBar,
-  ) {}
 
   onSubmit(): void {
     if (this.form.invalid) {
@@ -67,7 +66,6 @@ export class CategoryFormComponent {
           this.router.navigate(['/categories']);
         },
         error: (err: HttpErrorResponse) => {
-          // Código 409 = nome duplicado (índice único no MongoDB)
           this.snackBar.open(err.error?.message || 'Erro ao criar categoria.', 'OK', {
             duration: 4000,
           });
@@ -80,16 +78,8 @@ export class CategoryFormComponent {
     this.router.navigate(['/categories']);
   }
 
-  get name(): FormControl<string> {
-    return this.form.controls.name;
-  }
-  get description(): FormControl<string> {
-    return this.form.controls.description;
-  }
-  get charName(): number {
-    return this.name.value.length;
-  }
-  get charDesc(): number {
-    return this.description.value.length;
-  }
+  get name():        FormControl<string> { return this.form.controls.name; }
+  get description(): FormControl<string> { return this.form.controls.description; }
+  get charName():    number              { return this.name.value.length; }
+  get charDesc():    number              { return this.description.value.length; }
 }
