@@ -31,3 +31,8 @@ export const environment = {
   production: false,
   apiUrl: 'https://crud-api-products.onrender.com/api'
 };
+
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:4000/api'
+};
